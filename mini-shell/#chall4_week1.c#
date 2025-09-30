@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <string.h>
+
+#define BUFFER_SIZE 100
+
+int main() {
+
+  char buffer[BUFFER_SIZE];
+
+  // write time  
+  int fd = open("hello.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+  if (fd < 3) {
+    sprintf(buffer, "%s\n", strerror(errno));
+    write(STDOUT_FILENO, buffer, strlen(buffer));
+    exit(EXIT_FAILURE);
+  }
+
+  ssize_t bytes = read(STDIN_FILENO, buffer, sizeof(buffer));
+  write(fd, buffer, bytes);
+
+  close(fd);
+
+  // read time
+  
+  return EXIT_SUCCESS;  
+}  
