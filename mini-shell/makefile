@@ -1,6 +1,6 @@
 cc = clang
 cflags = -Wall -Wextra -g
-src = chall5_week1
+src = chall6_week1
 target = out
 
 all: $(target)
